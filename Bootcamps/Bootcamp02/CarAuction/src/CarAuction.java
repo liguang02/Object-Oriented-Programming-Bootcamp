@@ -1,6 +1,6 @@
 public class CarAuction {
     // declared an array of size 3
-    Car[] cars = new Car[3];
+    private Car[] cars = new Car[3];
 
     public void printStatus(){
         System.out.println("Welcome to FIT2099 Car Auction Systems");
@@ -13,13 +13,19 @@ public class CarAuction {
 
 
     }
+
+
+
     public void createCars(){
-        Car c1 = new Car("Audi", "TT", 2014);
-        Car c2 = new Car("Toyota", "XX", 2015);
-        Car c3 = new Car("Honda", "YY", 2012);
+        Car c1 = new Car("BMW", "X7", 2017);
+        Car c2 = new Car("Audi", "TT", 2014);
+        Car c3 = new Car("Chevrolet", "Corvette", 2020);
         cars[0] = c1;
         cars[1] = c2;
         cars[2] = c3;
+    }
+    public Car[] getCars() {
+        return cars;
     }
 
     public void displayCars(){
