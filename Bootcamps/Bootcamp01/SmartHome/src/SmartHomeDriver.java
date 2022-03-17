@@ -46,6 +46,21 @@ public class SmartHomeDriver {
 //        System.out.println(s4);
 //        System.out.println(SB1.getConsumptionToday());
 
+
+        //week 2
+        SmartSwitch smartSwitch = new SmartSwitch();
+        smartSwitch.turnOn();
+
+        smartSwitch.addBulb(new SmartBulb(true, "red"));
+        smartSwitch.addBulb(new SmartBulb(false,"yellow"));
+
+        smartSwitch.display();;
+
+        smartSwitch.turnAllOff();
+        smartSwitch.turnAllOn("Blue");
+
+        smartSwitch.display();
+
     }
 
 }

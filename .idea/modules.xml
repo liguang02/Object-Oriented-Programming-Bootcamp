@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Bootcamps/Bootcamp01/Calc_application/Calc_application.iml" filepath="$PROJECT_DIR$/Bootcamps/Bootcamp01/Calc_application/Calc_application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bootcamps/Bootcamp02/CarAuction/CarAuction.iml" filepath="$PROJECT_DIR$/Bootcamps/Bootcamp02/CarAuction/CarAuction.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bootcamps/Bootcamp01/SmartHome/SmartHome.iml" filepath="$PROJECT_DIR$/Bootcamps/Bootcamp01/SmartHome/SmartHome.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bootcamps/Bootcamp02/Week2 - L01 - 4 - Code smells and refact_finalCode/Week2 - L01 - 4 - Code smells and refact_finalCode.iml" filepath="$PROJECT_DIR$/Bootcamps/Bootcamp02/Week2 - L01 - 4 - Code smells and refact_finalCode/Week2 - L01 - 4 - Code smells and refact_finalCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Bootcamps/Bootcamp02/Week2 - L01 - 4 - Code smells and refact_initialCode/Week2 - L01 - 4 - Code smells and refact_initialCode.iml" filepath="$PROJECT_DIR$/Bootcamps/Bootcamp02/Week2 - L01 - 4 - Code smells and refact_initialCode/Week2 - L01 - 4 - Code smells and refact_initialCode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/lcha0068.iml" filepath="$PROJECT_DIR$/.idea/lcha0068.iml" />
+    </modules>
+  </component>
+</project>
