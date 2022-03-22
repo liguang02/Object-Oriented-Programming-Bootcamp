@@ -1,14 +1,14 @@
-import org.w3c.dom.ls.LSOutput;
-
 //import java.util.Date;
 
 public class Bid {
+    // instance variables(4) of bid class
     private int bidId;
     private Client client;
     private double bidPrice;
     // string
     private String date;
 
+    // setter and getter methods for all the instance variables in this class
     public int getBidId() {
         return bidId;
     }
@@ -41,10 +41,14 @@ public class Bid {
         this.date = date;
     }
 
-    public Bid(int bidId, Client client, double bidPrice, String date) {
+    //Constructor for bid class
+    public Bid(Integer bidId, Client client, double bidPrice, String date) {
         this.bidId = bidId;
         this.client = client;
         this.bidPrice = bidPrice;
         this.date = date;
     }
+
+
+
 }

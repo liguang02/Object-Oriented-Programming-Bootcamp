@@ -1,18 +1,23 @@
 public class Client {
+    //instance variables(3) of client class
     private int clientId;
     private String firstName;
     private String lastName;
 
+    // Creating two constructors with different signatures to achieve overloading
+    //First constructor
     public Client(int newClientId){
         this.clientId = newClientId;
     }
 
+    //Second constructor
     public Client(int newClientId, String newFirstName, String newLastName){
         this.clientId = newClientId;
         this.firstName = newFirstName;
         this.lastName = newLastName;
     }
 
+    //Setter methods for firstname and lastname
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -21,14 +26,11 @@ public class Client {
         this.lastName = lastName;
     }
 
+    // assessor method that returns a description of the Client object
     public String description(){
         String clientDesc = ("MY" + this.clientId + " " + this.firstName + " " + this.lastName);
         return clientDesc;
 
     }
-    //every car has at least 1 bid, 1 bid can have only 1 client,  1 client can have many bids
 
-    // 1. create car
-    // 2. display the car and bid
-    // 3. exit program
 }
