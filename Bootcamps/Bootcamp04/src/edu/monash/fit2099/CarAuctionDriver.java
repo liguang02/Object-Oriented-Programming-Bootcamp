@@ -1,3 +1,7 @@
+package edu.monash.fit2099;
+
+import edu.monash.fit2099.CarAuction;
+
 public class CarAuctionDriver {
     public static void main(String[] args) {
         //create an instance of car auction so it can invoke the printstatus where the core functionalities are.

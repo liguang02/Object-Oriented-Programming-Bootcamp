@@ -1,5 +1,8 @@
+package edu.monash.fit2099;
+
 import edu.monash.fit2099.Utils;
 import edu.monash.fit2099.bids.Bid;
+import edu.monash.fit2099.bids.BidsManager;
 import edu.monash.fit2099.clients.Client;
 import edu.monash.fit2099.vehicles.CruiserBike;
 import edu.monash.fit2099.vehicles.CruiserBikeType;
@@ -50,6 +53,8 @@ public class CarAuction {
         int clientID = util.nextID();
 
     }
+//    this method will be called when the user wish to create a cruisebike so that it
+//    will prompt for user input and take in the details and store it the vehicles list
     public void createCruiseBike(){
         System.out.println("Please enter Cruise Bike details: ");
         scanner.nextLine();
@@ -66,86 +71,66 @@ public class CarAuction {
         CruiserBikeType bobberBike = CruiserBikeType.BOBBER;
         CruiserBikeType chopperBike = CruiserBikeType.CHOPPER;
 
-        CruiserBike cruiserBike = null;
-        if (_bikeType.equalsIgnoreCase("bobber")){
-            CruiserBikeType bikeType = bobberBike;
-            cruiserBike = new CruiserBike(_carMaker, _carModel, _carModelYear, _vehicleID, bikeType);
-            vehicles.add(cruiserBike);
+        CruiserBike cruiserBike;
+//       it will loop through the enum class and check if the user input biketype
+//        is the same and then it will add it into the vehicle list
+
+        for (CruiserBikeType type: CruiserBikeType.values()){
+            if( type == CruiserBikeType.valueOf(_bikeType.toUpperCase())){
+                cruiserBike = new CruiserBike(_carMaker, _carModel, _carModelYear, _vehicleID, type);
+                vehicles.add(cruiserBike);
+            }
+
+
+            }
+
         }
-        else if (_bikeType.equalsIgnoreCase("chopper")){
-            CruiserBikeType bikeType = chopperBike;
-            cruiserBike = new CruiserBike(_carMaker, _carModel, _carModelYear, _vehicleID, bikeType);
-            vehicles.add(cruiserBike);
-        }
-        else{
-            System.out.println("Invalid Cruiser bike type! ");
-        }
 
-//
-
-
-
-    }
-
+//this method will prompt the user to input the client details and then create a
+//  client instance
     public void createClient(){
-        int bidSelection;
-        do{
-            bidSelection = clientMenuItem();
-            switch(bidSelection){
-                case 1:
-                    System.out.println("Please enter Client details: ");
-                    System.out.println("Client First name: ");
-                    String firstName = scanner.nextLine();
-                    System.out.println("Client Second name: ");
-                    String secondName = scanner.nextLine();
+        System.out.println("Please enter Client details: ");
+        scanner.nextLine();
+        System.out.println("Client First name: ");
+        String firstName = scanner.nextLine();
+        System.out.println("Client Second name: ");
+        String secondName = scanner.nextLine();
 
-                    Utils util = new Utils();
-                    int clientID = util.nextID();
-                    Client client = new Client(clientID,firstName,secondName);
-                    clients.add(client);
-                    break;
-                case 2:
-                    displayCarMenu();
-            }
-        }while (bidSelection != 10);
+        Utils util = new Utils();
+        int clientID = util.nextID();
+        Client client = new Client(clientID,firstName,secondName);
+        clients.add(client);
 
     }
-
+//this method will prompt the user to input the bid details and then it will call the
+// addBid() in BidManager class.
     public void createBid(){
-        int bidSelection;
-        do{
-            bidSelection = bidMenuItem();
-            switch(bidSelection){
-                case 1:
-                    System.out.println("Please enter bid details: ");
-                    scanner.nextLine();
-                    System.out.println("Vehicle ID: ");
-                    int vehicleId = Integer.parseInt(scanner.nextLine());
-                    System.out.println("Client ID: ");
-                    int clientId = Integer.parseInt(scanner.nextLine());
-                    System.out.println("Bid price: ");
-                    int price = Integer.parseInt(scanner.nextLine());
-                    System.out.println("Date(dd/mm/yyyy): ");
-                    String date = scanner.nextLine();
-                    
-                    for (int i = 0; i < vehicles.size() ; i++){
-                        if (vehicleId == vehicles.get(i).getVehicleID()){
-                            vehicles.get(i).addBid(clientId, price, date);
-                        }
-                    }
-
-                    break;
-                case 2:
-                    displayCarMenu();
+        System.out.println("Please enter bid details: ");
+        scanner.nextLine();
+        System.out.println("Vehicle ID: ");
+        int vehicleId = Integer.parseInt(scanner.nextLine());
+        System.out.println("Client ID: ");
+        int clientId = Integer.parseInt(scanner.nextLine());
+        System.out.println("Bid price: ");
+        double price = Double.parseDouble(scanner.nextLine());
+        System.out.println("Date(dd/mm/yyyy): ");
+        String date = scanner.nextLine();
+        scanner.nextLine();
+        for (int i = 0; i < vehicles.size() ; i++){
+            if (vehicleId == vehicles.get(i).getVehicleID()){
+                vehicles.get(i).getBidsManager().addBid(clientId, price, date);
             }
-        }while (bidSelection != 10);
+        }
     }
+    //    This method will display all the vehicles the users have created/inputted
     public void displayFleet(){
         for (int i = 0; i < vehicles.size(); i++) {
             int showingCarIndex = i + 1;
             System.out.println("Car (" + showingCarIndex + ") " + vehicles.get(i).description());
         }
     }
+    //This method will display all the clients the users have created/inputted
+
     public void displayClients(){
         for (int i = 0; i< clients.size(); i++){
             int showingClientIndex = i+ 1;
@@ -184,14 +169,19 @@ public class CarAuction {
                     break;
                 case 3:
                     displayFleet();
+                    break;
                 case 4:
                     createClient();
+                    break;
                 case 5:
                     displayClients();
+                    break;
                 case 6:
                     createBid();
+                    break;
                 case 7:
                     System.exit(0);
+                    break;
                 case 8:
                     System.out.println("Please select a valid option(1-3)");
                     break;
@@ -220,29 +210,29 @@ public class CarAuction {
     }
 
    //this method will printout the bid Menu in console and prompt the user for an input
-    public int bidMenuItem(){
-        System.out.println("-----------------------");
-        System.out.println("1) Add bid");
-        System.out.println("2) back");
-        System.out.println("Select an option: ");
-        int choice = scanner.nextInt();
-        if (choice > 2  || choice < 1){
-            choice = 3;
-        }
-        return choice;
-    }
+//    public int bidMenuItem(){
+//        System.out.println("-----------------------");
+//        System.out.println("1) Add bid");
+//        System.out.println("2) back");
+//        System.out.println("Select an option: ");
+//        int choice = scanner.nextInt();
+//        if (choice > 2  || choice < 1){
+//            choice = 3;
+//        }
+//        return choice;
+//    }
     //this method will printout the client Menu in console and prompt the user for an input
-    public int clientMenuItem(){
-        System.out.println("-----------------------");
-        System.out.println("1) Add client");
-        System.out.println("2) back");
-        System.out.println("Select an option: ");
-        int choice = scanner.nextInt();
-        if (choice > 2  || choice < 1){
-            choice = 3;
-        }
-        return choice;
-    }
+//    public int clientMenuItem(){
+//        System.out.println("-----------------------");
+//        System.out.println("1) Add client");
+//        System.out.println("2) back");
+//        System.out.println("Select an option: ");
+//        int choice = scanner.nextInt();
+//        if (choice > 2  || choice < 1){
+//            choice = 3;
+//        }
+//        return choice;
+//    }
 
 
 }

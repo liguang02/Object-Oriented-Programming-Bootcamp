@@ -26,45 +26,44 @@ abstract public class Vehicle {
         this.carModel = _carModel;
         this.carModelYear = _carModelYear;
         this.vehicleID = util.nextID();
+        this.bidsManager = new BidsManager();
+
     }
     public Vehicle(String _carMake, String _carModel, int _carModelYear, int _vehicleID){
         this.carMake = _carMake;
         this.carModel = _carModel;
         this.carModelYear = _carModelYear;
         this.vehicleID = _vehicleID;
+        this.bidsManager = new BidsManager();
     }
+
     //getter and setter methods for carMake, carModel and carModelYear
     public String getCarMake() {
         return carMake;
-    }
-
-    public void setCarMake(String carMake) {
-        this.carMake = carMake;
-    }
-
-    public String getCarModel() {
-        return carModel;
-    }
-
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
-    }
-
-    public int getCarModelYear() {
-        return carModelYear;
-    }
-
-    public void setCarModelYear(int carModelYear) {
-        this.carModelYear = carModelYear;
     }
 
     public BidsManager getBidsManager() {
         return bidsManager;
     }
 
+    public String getCarModel() {
+        return carModel;
+    }
+
+
+
+    public int getCarModelYear() {
+        return carModelYear;
+    }
+
+
+
 
     // assessor method that returns a description of the edu.monash.fit2099.clients.Client object
-    public abstract String description();
+    public String description(){
+        String carDesc = ("MY" + this.getCarModelYear() + " " + this.getCarMake() + " " + this.getCarModel());
+        return carDesc;
+    }
 
 
     //this method will add a bid instance into the bid array list(declared in this class)
