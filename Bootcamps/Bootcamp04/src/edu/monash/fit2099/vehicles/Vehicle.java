@@ -1,3 +1,9 @@
+package edu.monash.fit2099.vehicles;
+
+import edu.monash.fit2099.Utils;
+import edu.monash.fit2099.bids.Bid;
+import edu.monash.fit2099.bids.BidsManager;
+
 import java.util.ArrayList;
 
 abstract public class Vehicle {
@@ -5,15 +11,21 @@ abstract public class Vehicle {
     private String carMake;
     private String carModel;
     private int carModelYear;
-    private ArrayList<Bid> bids = new ArrayList<Bid>();
+//    private ArrayList<edu.monash.fit2099.bids.Bid> bids = new ArrayList<edu.monash.fit2099.bids.Bid>();
+    private BidsManager bidsManager;
     private int vehicleID;
 
+    public int getVehicleID() {
+        return vehicleID;
+    }
 
     //constructor
     public Vehicle(String _carMake, String _carModel, int _carModelYear){
+        Utils util = new Utils();
         this.carMake = _carMake;
         this.carModel = _carModel;
         this.carModelYear = _carModelYear;
+        this.vehicleID = util.nextID();
     }
     public Vehicle(String _carMake, String _carModel, int _carModelYear, int _vehicleID){
         this.carMake = _carMake;
@@ -46,23 +58,18 @@ abstract public class Vehicle {
         this.carModelYear = carModelYear;
     }
 
-    public ArrayList<Bid> getBids() {
-        return bids;
+    public BidsManager getBidsManager() {
+        return bidsManager;
     }
 
 
-    // assessor method that returns a description of the Client object
-    public String description(){
-        String carDesc = ("MY" + this.carModelYear + " " + this.carMake + " " + this.carModel);
-        return carDesc;
-    }
+    // assessor method that returns a description of the edu.monash.fit2099.clients.Client object
+    public abstract String description();
+
 
     //this method will add a bid instance into the bid array list(declared in this class)
-    public void addBid(Client newClient, double price, String date){
-        Utils util = new Utils();
-        int bidID = util.nextID();
-        Bid b1 = new Bid(bidID, newClient,price,date);
-        bids.add(b1);
+    public void addBid(int newClientId, double price, String date){
+        bidsManager.addBid(newClientId,price,date);
     }
 
 }

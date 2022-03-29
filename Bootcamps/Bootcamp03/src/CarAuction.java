@@ -94,7 +94,6 @@ public class CarAuction {
                     System.out.println("Please select a valid option(1-3)");
                     break;
             }
-
         }while (carSelection!=10);
     }
 

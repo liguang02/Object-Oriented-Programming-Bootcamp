@@ -1,3 +1,5 @@
+package edu.monash.fit2099;
+
 import java.util.Random;
 
 public class Utils {

@@ -1,9 +1,9 @@
-//import java.util.Date;
+package edu.monash.fit2099.bids;//import java.util.Date;
 
 public class Bid {
     // instance variables(4) of bid class
     private int bidId;
-    private Client client;
+    private int clientId;
     private double bidPrice;
     // string
     private String date;
@@ -17,12 +17,12 @@ public class Bid {
         this.bidId = bidId;
     }
 
-    public Client getClient() {
-        return client;
+    public int getClientId() {
+        return clientId;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
     public double getBidPrice() {
@@ -42,9 +42,9 @@ public class Bid {
     }
 
     //Constructor for bid class
-    public Bid(Integer bidId, Client client, double bidPrice, String date) {
+    public Bid(Integer bidId, int clientId, double bidPrice, String date) {
         this.bidId = bidId;
-        this.client = client;
+        this.clientId = clientId;
         this.bidPrice = bidPrice;
         this.date = date;
     }

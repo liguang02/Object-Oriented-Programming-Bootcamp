@@ -1,3 +1,5 @@
+package edu.monash.fit2099.clients;
+
 public class Client {
     //instance variables(3) of client class
     private int clientId;
@@ -26,7 +28,7 @@ public class Client {
         this.lastName = lastName;
     }
 
-    // assessor method that returns a description of the Client object
+    // assessor method that returns a description of the edu.monash.fit2099.clients.Client object
     public String description(){
         String clientDesc = ("MY" + this.clientId + " " + this.firstName + " " + this.lastName);
         return clientDesc;
