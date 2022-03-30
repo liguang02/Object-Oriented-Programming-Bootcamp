@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CarAuction {
-    // declared an array of size 3
+    // declared an arraylist of vehicle type
     private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
     //created a scanner instance to use the methods to prompt user input
     static Scanner scanner = new Scanner(System.in);
-
+    // declared an arraylist of client type
     private ArrayList <Client> clients = new ArrayList<Client>();
     //This method will invoke the i/o menu method which is displayCarMenu()
+
     public void printStatus(){
         System.out.println("Welcome to FIT2099 Car Auction Systems");
         displayCarMenu();
