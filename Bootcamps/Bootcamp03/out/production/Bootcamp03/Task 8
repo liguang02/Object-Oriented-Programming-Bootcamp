@@ -1,0 +1,20 @@
+Use a for loop to iterate through the Car list in CarAuction class and for every car
+we iterate through the bid list which contains the client object, thus we can use the
+description() implemented in client class to print the client details.
+
+It is necessary to start the iteration at Car arraylist as it contains all the bids which
+contains the client object.
+
+To solve the duplication problem, I would do a if check statement to see if the clientname
+has already been shown before in previous iteration by comparing it with a temporary arraylist
+that stores all the clientnames that it printed.
+
+I would implement the this list all Client method in CarAuction class as this is where
+the user input all the data and it has access to car, bid and client class.
+
+pseudocode:
+for i < car_array.size(), i++:
+    for j < bid_array.size(), j++:
+        if clientName not in clientName_lst:
+            client.description();
+            clientName_lst.add(clientName);
