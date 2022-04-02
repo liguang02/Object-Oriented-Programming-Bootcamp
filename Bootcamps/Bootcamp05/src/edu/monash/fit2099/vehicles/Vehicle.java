@@ -20,20 +20,20 @@ abstract public class Vehicle {
     }
 
     //constructor
-    public Vehicle(String _carMake, String _carModel, int _carModelYear){
+    public Vehicle(String carMake, String carModel, int carModelYear){
         Utils util = new Utils();
-        this.carMake = _carMake;
-        this.carModel = _carModel;
-        this.carModelYear = _carModelYear;
+        this.carMake = carMake;
+        this.carModel = carModel;
+        this.carModelYear = carModelYear;
         this.vehicleID = util.nextID();
         this.bidsManager = new BidsManager();
 
     }
-    public Vehicle(String _carMake, String _carModel, int _carModelYear, int _vehicleID){
-        this.carMake = _carMake;
-        this.carModel = _carModel;
-        this.carModelYear = _carModelYear;
-        this.vehicleID = _vehicleID;
+    public Vehicle(String carMake, String carModel, int carModelYear, int vehicleID){
+        this.carMake = carMake;
+        this.carModel = carModel;
+        this.carModelYear = carModelYear;
+        this.vehicleID = vehicleID;
         this.bidsManager = new BidsManager();
     }
 

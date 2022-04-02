@@ -1,15 +1,13 @@
 package edu.monash.fit2099;
 
-import edu.monash.fit2099.Utils;
-import edu.monash.fit2099.bids.Bid;
-import edu.monash.fit2099.bids.BidsManager;
 import edu.monash.fit2099.clients.Client;
-import edu.monash.fit2099.vehicles.CruiserBike;
-import edu.monash.fit2099.vehicles.CruiserBikeType;
+import edu.monash.fit2099.vehicles.BobberBike;
+import edu.monash.fit2099.vehicles.ChopperBike;
 import edu.monash.fit2099.vehicles.SportCar;
 import edu.monash.fit2099.vehicles.Vehicle;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class CarAuction {
@@ -34,20 +32,20 @@ public class CarAuction {
         System.out.println("Please enter Sport Car details: ");
         scanner.nextLine();
         System.out.println("Car Maker: ");
-        String _carMaker = scanner.nextLine();
+        String carMakerInput = scanner.nextLine();
         System.out.println("Car Model: ");
-        String _carModel = scanner.nextLine();
+        String carModelInput = scanner.nextLine();
         System.out.println("Car Model Year: ");
-        int _carModelYear = Integer.parseInt(scanner.nextLine());
+        int carModelYearInput = Integer.parseInt(scanner.nextLine());
         System.out.println("Number of seats: ");
-        int _numOfSeats = Integer.parseInt(scanner.nextLine());
+        int numOfSeatsInput = Integer.parseInt(scanner.nextLine());
         System.out.println("Is this car convertible?(True or False): ");
-        boolean _isConvertible = scanner.nextBoolean();
+        boolean isConvertibleInput = scanner.nextBoolean();
         scanner.nextLine();
         System.out.println("Vehicle ID: ");
-        int _vehicleID = Integer.parseInt(scanner.nextLine());
+        int vehicleIDInput = Integer.parseInt(scanner.nextLine());
 //
-        SportCar sportcar = new SportCar(_carMaker, _carModel, _carModelYear, _vehicleID, _numOfSeats, _isConvertible);
+        SportCar sportcar = new SportCar(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput, numOfSeatsInput, isConvertibleInput);
         vehicles.add(sportcar);
 
         Utils util = new Utils();
@@ -60,32 +58,29 @@ public class CarAuction {
         System.out.println("Please enter Cruise Bike details: ");
         scanner.nextLine();
         System.out.println("Bike Maker: ");
-        String _carMaker = scanner.nextLine();
+        String carMakerInput = scanner.nextLine();
         System.out.println("Bike Model: ");
-        String _carModel = scanner.nextLine();
+        String carModelInput = scanner.nextLine();
         System.out.println("Bike Model Year: ");
-        int _carModelYear = Integer.parseInt(scanner.nextLine());
+        int carModelYearInput = Integer.parseInt(scanner.nextLine());
         System.out.println("Which type? (Chopper or Bobber): ");
-        String _bikeType = scanner.nextLine();
+        String bikeTypeInput = scanner.nextLine();
         System.out.println("Vehicle ID: ");
-        int _vehicleID = Integer.parseInt(scanner.nextLine());
-        CruiserBikeType bobberBike = CruiserBikeType.BOBBER;
-        CruiserBikeType chopperBike = CruiserBikeType.CHOPPER;
+        int vehicleIDInput = Integer.parseInt(scanner.nextLine());
 
-        CruiserBike cruiserBike;
+
+        ChopperBike chopper = new ChopperBike(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput);
+        BobberBike bobber = new BobberBike(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput);
 //       it will loop through the enum class and check if the user input biketype
 //        is the same and then it will add it into the vehicle list
 
-        for (CruiserBikeType type: CruiserBikeType.values()){
-            if( type == CruiserBikeType.valueOf(_bikeType.toUpperCase())){
-                cruiserBike = new CruiserBike(_carMaker, _carModel, _carModelYear, _vehicleID, type);
-                vehicles.add(cruiserBike);
-            }
-
-
-            }
-
+        if(chopper.getBikeType().equals(bikeTypeInput.toUpperCase()) ){
+            vehicles.add(chopper);
+        } else if (bobber.getBikeType().equals(bikeTypeInput.toUpperCase())){
+            vehicles.add(bobber);
         }
+
+    }
 
 //this method will prompt the user to input the client details and then create a
 //  client instance
