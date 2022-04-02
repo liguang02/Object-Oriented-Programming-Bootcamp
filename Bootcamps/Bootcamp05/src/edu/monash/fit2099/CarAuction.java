@@ -1,10 +1,10 @@
 package edu.monash.fit2099;
 
+import edu.monash.fit2099.bids.Bid;
+import edu.monash.fit2099.bids.BidsManager;
 import edu.monash.fit2099.clients.Client;
-import edu.monash.fit2099.vehicles.BobberBike;
-import edu.monash.fit2099.vehicles.ChopperBike;
-import edu.monash.fit2099.vehicles.SportCar;
-import edu.monash.fit2099.vehicles.Vehicle;
+import edu.monash.fit2099.taxation.TaxationManager;
+import edu.monash.fit2099.vehicles.*;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -44,7 +44,14 @@ public class CarAuction {
         scanner.nextLine();
         System.out.println("Vehicle ID: ");
         int vehicleIDInput = Integer.parseInt(scanner.nextLine());
-//
+
+        try{
+            SportCar car = new SportCar(carMakerInput, carModelInput, carModelYearInput, numOfSeatsInput, isConvertibleInput);
+            vehicles.add(car);
+            System.out.println(car);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         SportCar sportcar = new SportCar(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput, numOfSeatsInput, isConvertibleInput);
         vehicles.add(sportcar);
 
@@ -69,6 +76,14 @@ public class CarAuction {
         int vehicleIDInput = Integer.parseInt(scanner.nextLine());
 
 
+        try{
+            ChopperBike chopperBike = new ChopperBike(carMakerInput, carModelInput, carModelYearInput);
+            BobberBike bobberBike = new BobberBike(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput);
+            System.out.println(chopperBike);
+            System.out.println(bobberBike);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         ChopperBike chopper = new ChopperBike(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput);
         BobberBike bobber = new BobberBike(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput);
 //       it will loop through the enum class and check if the user input biketype
@@ -94,7 +109,7 @@ public class CarAuction {
 
         Utils util = new Utils();
         int clientID = util.nextID();
-        Client client = new Client(clientID,firstName,secondName);
+        Client client = Client.getInstance(firstName,secondName);
         clients.add(client);
 
     }
@@ -114,7 +129,25 @@ public class CarAuction {
         scanner.nextLine();
         for (int i = 0; i < vehicles.size() ; i++){
             if (vehicleId == vehicles.get(i).getVehicleID()){
-                vehicles.get(i).getBidsManager().addBid(clientId, price, date);
+                BidsManager bidsManager= vehicles.get(i).getBidsManager();
+                bidsManager.addBid(clientId, price, date);
+                String vehicleDesc;
+                String bidDesc;
+                String taxDesc = "";
+                vehicleDesc = "Bid for vehicle: " + vehicles.get(i).getVehicleID() + "| " + vehicles.get(i).description();
+                for (Integer key : bidsManager.getHashmap().keySet()){
+                    Bid bid = bidsManager.getHashmap().get(key);
+                    bidDesc = String.join(",", "BidID=" + bid.getBidId(), " BuyerID=" + key , " price=" + bid.getBidPrice(), " date=" + bid.getDate().substring(bid.getDate().length()-4));
+                    for (TaxableVehicle vehicle : TaxationManager.getInstance().getTaxableVehicle()){
+                        if (vehicles.get(i).equals(vehicle)){
+                            taxDesc = "Price: " + bid.getBidPrice() + " Tax: " + vehicle.calculateTaxRate(bid.getBidPrice());
+                            break;
+                        }else{
+                            taxDesc = "Price: " + bid.getBidPrice() + " Tax: NO TAX";
+                        }}
+                    System.out.println(vehicleDesc + "\n" + bidDesc + "\n" + taxDesc);
+
+                }
             }
         }
     }

@@ -9,11 +9,17 @@ public class SportCar extends Vehicle implements TaxableVehicle {
     private boolean isConvertible;
 
     // Creating two constructors with different signatures to achieve overloading
-    public SportCar(String carMake, String carModel, int carModelYear, int seats, boolean isConvertible) {
+    public SportCar(String carMake, String carModel, int carModelYear, int seats, boolean isConvertible) throws Exception{
         super(carMake, carModel, carModelYear);
-        this.seats = seats;
-        this.isConvertible = isConvertible;
-        this.addToTaxationManager();
+
+        if (setCarMake(carMake) && setCarModel(carModel) && setCarModelYear((carModelYear))){
+            this.seats = seats;
+            this.isConvertible = isConvertible;
+            this.addToTaxationManager();
+        }else{
+            throw new Exception("Incorrect Vehicle's Maker, Model or Make/Model Year ");
+        }
+
 
     }
 
@@ -26,11 +32,19 @@ public class SportCar extends Vehicle implements TaxableVehicle {
 
     }
 
-    @Override
-    public String description(){
-        String carDesc = ("MY" + super.getCarModelYear() + " " + super.getCarMake() + " " + super.getCarModel() + " " + this.seats + " seats.");
-        return carDesc;
+    public boolean setSeats(int seats) {
+        boolean isValid = false;
+        if ((seats >=2) && (seats <= 5))  {
+            this.seats = seats;
+            isValid = true;
+        }
+        return isValid;
     }
+//    @Override
+//    public String description(){
+//        String carDesc = ("MY" + super.getCarModelYear() + " " + super.getCarMake() + " " + super.getCarModel() + " " + this.seats + " seats.");
+//        return carDesc;
+//    }
 
     @Override
     public double calculateTaxRate(double price) {

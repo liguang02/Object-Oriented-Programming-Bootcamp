@@ -1,5 +1,8 @@
 package edu.monash.fit2099.vehicles;
 
+import edu.monash.fit2099.Utils;
+import edu.monash.fit2099.bids.BidsManager;
+
 import java.util.Calendar;
 
 public class ChopperBike extends Vehicle implements TaxableVehicle{
@@ -9,10 +12,13 @@ public class ChopperBike extends Vehicle implements TaxableVehicle{
 
     // Creating two constructors with different signatures to achieve overloading
 
-    public ChopperBike(String carMake, String carModel, int carModelYear) {
-        super(carMake, carModel, carModelYear);
-        this.addToTaxationManager();
-
+    public ChopperBike(String maker, String model, int modelYear) throws Exception {
+        super(maker, model, modelYear);
+        if (setCarMake(maker) && setCarModel(model) && setCarModelYear((modelYear))) {
+            this.addToTaxationManager();
+        }else{
+            throw new Exception("Incorrect Vehicle's Maker, Model or Make/Model Year ");
+        }
     }
 
 
