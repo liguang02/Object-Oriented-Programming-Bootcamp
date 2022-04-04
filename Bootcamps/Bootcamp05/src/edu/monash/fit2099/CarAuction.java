@@ -10,15 +10,29 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * CarAuction class is a class that handles all the core activities
+ * such as creating sport car/cruiserbike/bid/client and so on. It
+ * is also responsible to display the menu items.
+ */
 public class CarAuction {
-    // declared an arraylist of vehicle type
+    /**
+     * An array list of vehicles
+     */
     private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
     //created a scanner instance to use the methods to prompt user input
+    /**
+     * A scanner class to use the nextLine() to prompt the user input
+     */
     static Scanner scanner = new Scanner(System.in);
-    // declared an arraylist of client type
+    /**
+     * An array list of client type
+     */
     private ArrayList <Client> clients = new ArrayList<Client>();
-    //This method will invoke the i/o menu method which is displayCarMenu()
 
+    /**
+     * This method will invoke the i/o menu method which is displayCarMenu()
+     */
     public void printStatus(){
         System.out.println("Welcome to FIT2099 Car Auction Systems");
         displayCarMenu();
@@ -26,8 +40,13 @@ public class CarAuction {
 
     }
 
-    //a method that will create objects of car, client and bid with the data that is obtained
-    //from the user input
+
+
+    /**
+     *     this method will be called when the user wish to create a sport car so that it
+     *     will prompt for user input and take in the details and store it the vehicles list
+     * @exception Exception will throw an exception if the user input is invalid.
+     */
     public void createSportCar(){
         System.out.println("Please enter Sport Car details: ");
         scanner.nextLine();
@@ -45,22 +64,23 @@ public class CarAuction {
         System.out.println("Vehicle ID: ");
         int vehicleIDInput = Integer.parseInt(scanner.nextLine());
 
+        //a try and catch clause to check the user inputted values can be used to create the instances of the
+        // sport car.
         try{
-            SportCar car = new SportCar(carMakerInput, carModelInput, carModelYearInput, numOfSeatsInput, isConvertibleInput);
+            SportCar car = new SportCar(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput, numOfSeatsInput, isConvertibleInput);
             vehicles.add(car);
-            System.out.println(car);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        SportCar sportcar = new SportCar(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput, numOfSeatsInput, isConvertibleInput);
-        vehicles.add(sportcar);
-
-        Utils util = new Utils();
-        int clientID = util.nextID();
 
     }
-//    this method will be called when the user wish to create a cruisebike so that it
-//    will prompt for user input and take in the details and store it the vehicles list
+
+
+    /**
+     *     this method will be called when the user wish to create a cruisebike so that it
+     *     will prompt for user input and take in the details and store it the vehicles list
+     *     @exception Exception will throw an exception if the user input is invalid.
+     */
     public void createCruiseBike(){
         System.out.println("Please enter Cruise Bike details: ");
         scanner.nextLine();
@@ -75,30 +95,33 @@ public class CarAuction {
         System.out.println("Vehicle ID: ");
         int vehicleIDInput = Integer.parseInt(scanner.nextLine());
 
-
+        //a try and catch clause to check the user inputted values can be used to create the instances of the
+        // cruiser bikes and check if the bike type is belongs to which cruiser bike. It will throw an
+        //exception if the user input is invalid.
         try{
-            ChopperBike chopperBike = new ChopperBike(carMakerInput, carModelInput, carModelYearInput);
+            ChopperBike chopperBike = new ChopperBike(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput);
             BobberBike bobberBike = new BobberBike(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput);
-            System.out.println(chopperBike);
-            System.out.println(bobberBike);
+            if(chopperBike.getBikeType().equals(bikeTypeInput.toUpperCase()) ){
+                vehicles.add(chopperBike);
+            } else if (bobberBike.getBikeType().equals(bikeTypeInput.toUpperCase())){
+                vehicles.add(bobberBike);
+            }
+
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        ChopperBike chopper = new ChopperBike(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput);
-        BobberBike bobber = new BobberBike(carMakerInput, carModelInput, carModelYearInput, vehicleIDInput);
-//       it will loop through the enum class and check if the user input biketype
-//        is the same and then it will add it into the vehicle list
 
-        if(chopper.getBikeType().equals(bikeTypeInput.toUpperCase()) ){
-            vehicles.add(chopper);
-        } else if (bobber.getBikeType().equals(bikeTypeInput.toUpperCase())){
-            vehicles.add(bobber);
-        }
+
+
 
     }
 
-//this method will prompt the user to input the client details and then create a
-//  client instance
+
+
+    /**
+     *   this method will prompt the user to input the client details and then create a
+     *   client instance
+     */
     public void createClient(){
         System.out.println("Please enter Client details: ");
         scanner.nextLine();
@@ -107,14 +130,16 @@ public class CarAuction {
         System.out.println("Client Second name: ");
         String secondName = scanner.nextLine();
 
-        Utils util = new Utils();
-        int clientID = util.nextID();
         Client client = Client.getInstance(firstName,secondName);
         clients.add(client);
 
     }
-//this method will prompt the user to input the bid details and then it will call the
-// addBid() in BidManager class.
+
+
+    /**
+     * this method will prompt the user to input the bid details and then it will call the
+     *  addBid() in BidManager class.
+     */
     public void createBid(){
         System.out.println("Please enter bid details: ");
         scanner.nextLine();
@@ -151,15 +176,20 @@ public class CarAuction {
             }
         }
     }
-    //    This method will display all the vehicles the users have created/inputted
+
+    /**
+     *   This method will display all the vehicles the users have created/inputted
+     */
     public void displayFleet(){
         for (int i = 0; i < vehicles.size(); i++) {
             int showingCarIndex = i + 1;
             System.out.println("Car (" + showingCarIndex + ") " + vehicles.get(i).description());
         }
     }
-    //This method will display all the clients the users have created/inputted
 
+    /**
+     *     This method will display all the clients the users have created/inputted
+     */
     public void displayClients(){
         for (int i = 0; i< clients.size(); i++){
             int showingClientIndex = i+ 1;
@@ -167,24 +197,9 @@ public class CarAuction {
         }
     }
 
-    //this method will print out the description of all the cars, bids and clients' information.
-//    public void displayCars(){
-//        for(int i = 0; i < vehicles.size(); i++){
-//            int showingCarIndex = i + 1;
-//            System.out.println("Car (" + showingCarIndex + ") " + vehicles.get(i).description());
-//            int j = 0;
-//            for (int bidKey: vehicles.get(i).getBidsManager().getHashmap().keySet()){
-//                int showingBidindex = j + 1;
-//                Bid bid = vehicles.get(i).getBidsManager().getHashmap().get(bidKey);
-//                System.out.println("Bid (" + showingBidindex + ")");
-//                System.out.println("BidID: " + bid.getBidId() + " Bid price: " + bid.getBidPrice() + " Bid Date: " + bid.getDate());
-//                System.out.println(bid.getClientId().description());
-//                System.out.println("-----------------------------------------------");
-//            }
-//
-//        }
-//    }
-    // This method will take care of the user input of carMenuitem()
+    /**
+     *      This method will take care of the user input of carMenuitem()
+     */
     public void displayCarMenu(){
         int carSelection;
         do{
@@ -219,7 +234,10 @@ public class CarAuction {
         }while (carSelection!=10);
     }
 
-    //this method will printout the carMenu in console and prompt the user for an input
+    /**
+     * this method will printout the carMenu in console and prompt the user for an input
+     * @return an integer representing the user's input of choice for a certain action
+     */
     public int carMenuItem(){
         System.out.println("-----------------------");
         System.out.println("1) New Sport Car");
@@ -238,30 +256,6 @@ public class CarAuction {
         return choice;
     }
 
-   //this method will printout the bid Menu in console and prompt the user for an input
-//    public int bidMenuItem(){
-//        System.out.println("-----------------------");
-//        System.out.println("1) Add bid");
-//        System.out.println("2) back");
-//        System.out.println("Select an option: ");
-//        int choice = scanner.nextInt();
-//        if (choice > 2  || choice < 1){
-//            choice = 3;
-//        }
-//        return choice;
-//    }
-    //this method will printout the client Menu in console and prompt the user for an input
-//    public int clientMenuItem(){
-//        System.out.println("-----------------------");
-//        System.out.println("1) Add client");
-//        System.out.println("2) back");
-//        System.out.println("Select an option: ");
-//        int choice = scanner.nextInt();
-//        if (choice > 2  || choice < 1){
-//            choice = 3;
-//        }
-//        return choice;
-//    }
 
 
 }
