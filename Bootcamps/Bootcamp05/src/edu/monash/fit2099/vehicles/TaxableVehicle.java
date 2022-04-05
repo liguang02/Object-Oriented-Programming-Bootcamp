@@ -7,6 +7,7 @@ import edu.monash.fit2099.taxation.TaxationManager;
  */
 public interface TaxableVehicle {
     /**
+     * Default method for this interface
      * Calculate the tax rate of the taxable vehicle
      * @param price price of the taxable vehicle
      * @return a double value representing the tax price of the taxable vehicle
