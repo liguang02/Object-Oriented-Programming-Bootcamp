@@ -1,0 +1,4 @@
+The advantage of throwing exceptions is that the program is able to print/display a customized error message to the
+users when their input is invalid. However, the program will stop running if the error is thrown.
+On the other hand, advantage static factory of is the program will not really throw out any error and force the application
+to stop running. This is because it will just set the object to null value if the user entered an invalid input.

@@ -110,13 +110,7 @@ public class CarAuction {
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-
-
-
-
     }
-
-
 
     /**
      *   this method will prompt the user to input the client details and then create a
@@ -130,7 +124,7 @@ public class CarAuction {
         System.out.println("Client Second name: ");
         String secondName = scanner.nextLine();
 
-        Client client = Client.getInstance(firstName,secondName);
+        Client client = Client.getInstance(firstName,secondName, Utils.nextID());
         clients.add(client);
 
     }

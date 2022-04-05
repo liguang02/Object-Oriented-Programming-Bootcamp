@@ -95,10 +95,11 @@ public class Client {
      * @param lastName the client's last name
      * @return the client instance if it passed the validity check
      */
-    public static Client getInstance(String firstName, String lastName) {
+    public static Client getInstance(String firstName, String lastName, int clientID) {
         Client client = new Client();
         if (!(client.setFirstName(firstName) && client.setLastName(lastName)))
             client = null;
+        client.clientId = clientID;
         return (client);
     }
 

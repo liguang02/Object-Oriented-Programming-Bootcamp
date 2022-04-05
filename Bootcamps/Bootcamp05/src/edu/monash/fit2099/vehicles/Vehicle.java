@@ -50,9 +50,6 @@ abstract public class Vehicle {
         if (setCarMake(maker) && setCarModel(model) && setCarModelYear((modelYear))) {
             this.bidsManager = new BidsManager();
             this.vehicleID = vehicleID;
-            this.carMake = maker;
-            this.carModel = model;
-            this.carModelYear = modelYear;
 
         } else {
             throw new Exception("Incorrect Vehicle's Maker, Model or Make/Model Year ");

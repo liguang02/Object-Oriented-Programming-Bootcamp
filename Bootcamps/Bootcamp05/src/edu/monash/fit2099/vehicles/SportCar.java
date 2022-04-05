@@ -35,7 +35,6 @@ public class SportCar extends Vehicle implements TaxableVehicle {
     public SportCar(String carMake, String carModel, int carModelYear, int vehicleID,  int seats, boolean isConvertible) throws Exception{
         super(carMake, carModel, carModelYear, vehicleID);
         if (setCarMake(carMake) && setCarModel(carModel) && setCarModelYear((carModelYear)) && setSeats(seats)){
-            this.seats = seats;
             this.isConvertible = isConvertible;
             this.addToTaxationManager();
         }else{
